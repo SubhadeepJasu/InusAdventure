@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://24dsbihle1l5"
+path="res://.godot/imported/InfiniteTerrainMesh.obj-ccf1866521d506493932f2b2a99668e1.mesh"
+
+[deps]
+
+files=["res://.godot/imported/InfiniteTerrainMesh.obj-ccf1866521d506493932f2b2a99668e1.mesh"]
+
+source_file="res://raw_assets/InfiniteTerrainMesh.obj"
+dest_files=["res://.godot/imported/InfiniteTerrainMesh.obj-ccf1866521d506493932f2b2a99668e1.mesh", "res://.godot/imported/InfiniteTerrainMesh.obj-ccf1866521d506493932f2b2a99668e1.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://1j412ki37uv3"]
+
+[ext_resource type="PackedScene" uid="uid://ckt7g5ohdvrmf" path="res://scenes/world/prototype/prototype.tscn" id="1_tl5vh"]
+[ext_resource type="PackedScene" uid="uid://6k672k4tlcjy" path="res://scenes/characters/player/player.tscn" id="2_jtw86"]
+[ext_resource type="Script" path="res://src/world/MainCamera.cs" id="3_f8h3b"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_en67t"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 5.2
+dof_blur_near_enabled = true
+dof_blur_near_distance = 5.5
+
+[node name="World" type="Node3D"]
+
+[node name="ProtoType" parent="." instance=ExtResource("1_tl5vh")]
+
+[node name="Player" parent="." instance=ExtResource("2_jtw86")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 0, -1)
+
+[node name="MainCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.89004)
+cull_mask = 1046527
+attributes = SubResource("CameraAttributesPractical_en67t")
+doppler_tracking = 2
+script = ExtResource("3_f8h3b")

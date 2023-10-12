@@ -1,0 +1,381 @@
+[gd_scene load_steps=13 format=3 uid="uid://ckt7g5ohdvrmf"]
+
+[ext_resource type="Material" uid="uid://gpe3tef11iae" path="res://materials/prototype_materials/prototype_material.material" id="2_c68gy"]
+[ext_resource type="Texture2D" uid="uid://qsl2eelamfm1" path="res://assets/sprites/world/trees/Tree1/Tree1Trunk.png" id="3_e1ual"]
+[ext_resource type="Texture2D" uid="uid://i4y5r6y1ks8c" path="res://assets/sprites/world/trees/Tree1/Tree1Leaves1.png" id="4_sdyd1"]
+[ext_resource type="Texture2D" uid="uid://cqorihhwx8ene" path="res://assets/sprites/world/trees/Tree1/Tree1Leaves2.png" id="5_dw3tm"]
+[ext_resource type="Texture2D" uid="uid://c74jc2ylmj725" path="res://assets/sprites/world/prototype/Level1DesignGuide.jpg" id="6_ffidk"]
+[ext_resource type="PackedScene" uid="uid://dyu0rg4bo1s1f" path="res://scenes/world/terrain/infinite_terrain.tscn" id="7_wr7tp"]
+[ext_resource type="PackedScene" uid="uid://pmocamrwrgva" path="res://scenes/world/water/water_volume.tscn" id="9_2a4vx"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_ggfbk"]
+use_debanding = false
+
+[sub_resource type="Sky" id="Sky_4rvdx"]
+sky_material = SubResource("PhysicalSkyMaterial_ggfbk")
+
+[sub_resource type="Environment" id="Environment_3cd1p"]
+background_mode = 2
+background_energy_multiplier = 1.99
+sky = SubResource("Sky_4rvdx")
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.68
+ambient_light_energy = 0.77
+reflected_light_source = 2
+tonemap_mode = 3
+ssil_enabled = true
+ssil_intensity = 2.96
+sdfgi_use_occlusion = true
+sdfgi_energy = 0.915
+glow_enabled = true
+glow_normalized = true
+glow_strength = 1.46
+glow_bloom = 0.28
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
+volumetric_fog_emission = Color(0.0196078, 0.0235294, 0, 1)
+volumetric_fog_emission_energy = 55.47
+volumetric_fog_gi_inject = 5.37
+volumetric_fog_ambient_inject = 0.5
+
+[sub_resource type="FogMaterial" id="FogMaterial_j0y75"]
+density = 0.32
+albedo = Color(0, 0.258824, 0.235294, 1)
+emission = Color(0, 0.286275, 0.270588, 1)
+edge_fade = 0.13195
+
+[sub_resource type="BoxMesh" id="BoxMesh_8aqdw"]
+size = Vector3(1, 12, 1)
+
+[node name="Prototype" type="Node3D"]
+
+[node name="PrototypeEnvHigh" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3cd1p")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.86003, 0.279137, 0.427119, 0.213181, -0.957101, 0.196244, 0.463575, -0.0777224, -0.882643, 0, 0, 0.368311)
+light_color = Color(0.791396, 1, 0.72761, 1)
+light_indirect_energy = 5.417
+light_volumetric_fog_energy = 8.165
+light_bake_mode = 1
+light_cull_mask = 4294965247
+shadow_enabled = true
+shadow_blur = 0.0
+directional_shadow_mode = 1
+
+[node name="HouseBlockOut" type="CSGCombiner3D" parent="."]
+layers = 2
+calculate_tangents = false
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="HouseBlockOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 4, -4)
+calculate_tangents = false
+size = Vector3(46, 8, 8)
+material = ExtResource("2_c68gy")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="HouseBlockOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 5, -3)
+operation = 2
+calculate_tangents = false
+size = Vector3(44, 8, 8)
+material = ExtResource("2_c68gy")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="HouseBlockOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 8, 0)
+calculate_tangents = false
+polygon = PackedVector2Array(-20, 0, 1, 11, 3, 12, 26, 0)
+depth = 12.0
+material = ExtResource("2_c68gy")
+
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="HouseBlockOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 8, 0)
+operation = 2
+calculate_tangents = false
+polygon = PackedVector2Array(-18, 0, 1, 10, 3, 11, 24, 0)
+depth = 11.0
+material = ExtResource("2_c68gy")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="HouseBlockOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 6, -5)
+calculate_tangents = false
+size = Vector3(1, 10, 4)
+material = ExtResource("2_c68gy")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="HouseBlockOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 9, -5)
+calculate_tangents = false
+size = Vector3(1, 16, 4)
+material = ExtResource("2_c68gy")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="HouseBlockOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 10, -6)
+calculate_tangents = false
+size = Vector3(12, 0.5, 10)
+material = ExtResource("2_c68gy")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="HouseBlockOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 10, -6)
+calculate_tangents = false
+size = Vector3(4, 0.5, 10)
+material = ExtResource("2_c68gy")
+
+[node name="Window" type="CSGBox3D" parent="HouseBlockOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 14, -7)
+operation = 2
+calculate_tangents = false
+size = Vector3(2, 4, 2)
+material = ExtResource("2_c68gy")
+
+[node name="Window2" type="CSGBox3D" parent="HouseBlockOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 5, -7)
+operation = 2
+calculate_tangents = false
+size = Vector3(2, 4, 2)
+material = ExtResource("2_c68gy")
+
+[node name="Window3" type="CSGBox3D" parent="HouseBlockOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5, -7)
+operation = 2
+calculate_tangents = false
+size = Vector3(2, 4, 2)
+material = ExtResource("2_c68gy")
+
+[node name="Window4" type="CSGBox3D" parent="HouseBlockOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 5, -7)
+operation = 2
+calculate_tangents = false
+size = Vector3(4, 4, 2)
+material = ExtResource("2_c68gy")
+
+[node name="Window5" type="CSGBox3D" parent="HouseBlockOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4, -1)
+operation = 2
+calculate_tangents = false
+size = Vector3(2, 6, 2)
+material = ExtResource("2_c68gy")
+
+[node name="Lighting" type="Node3D" parent="."]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 8, 9, -4)
+light_color = Color(1, 0.847059, 0.721569, 1)
+light_energy = 16.0
+light_indirect_energy = 6.25
+light_volumetric_fog_energy = 5.583
+light_specular = 4.667
+shadow_enabled = true
+spot_range = 10.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 20, 14, -4)
+light_color = Color(1, 0.847059, 0.721569, 1)
+light_energy = 16.0
+light_indirect_energy = 10.833
+light_volumetric_fog_energy = 8.166
+light_specular = 4.667
+shadow_enabled = true
+shadow_blur = 7.919
+spot_range = 15.0
+spot_attenuation = 0.482968
+
+[node name="TerrainBlockOut" type="CSGCombiner3D" parent="."]
+layers = 2
+use_collision = true
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="TerrainBlockOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, -14, 0)
+polygon = PackedVector2Array(0, 0, 13, 5, 17, 7, 24, 10, 52, 15, 86, 15, 105, 14, 124, 15, 133, 20, 132, 0)
+depth = 10.0
+smooth_faces = true
+material = ExtResource("2_c68gy")
+
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="TerrainBlockOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -157, -14, 0)
+polygon = PackedVector2Array(0, 0, 0, 9, 7, 8, 14, 8, 14, 14, 15, 14, 15, 8, 24, 9, 33, 11, 49, 12, 63, 10, 71, 8, 85, 6, 96, 2, 109, 0)
+depth = 10.0
+smooth_faces = true
+material = ExtResource("2_c68gy")
+
+[node name="LightBlockOut" type="CSGCombiner3D" parent="."]
+cast_shadow = 3
+
+[node name="CSGBox3D" type="CSGBox3D" parent="LightBlockOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.6601, -5.60216, -56.0644)
+layers = 31
+cast_shadow = 3
+gi_mode = 0
+size = Vector3(110.138, 42.0072, 31.4932)
+material = ExtResource("2_c68gy")
+
+[node name="WaterVolume" parent="." instance=ExtResource("9_2a4vx")]
+transform = Transform3D(4.34, 0, 0, 0, 1, 0, 0, 0, 4.34, -50, -11.002, 0)
+
+[node name="FogVolume" type="FogVolume" parent="."]
+transform = Transform3D(0.95, 0, 0, 0, 1, 0, 0, 0, 0.95, -50, -12, -8.84787)
+layers = 15
+size = Vector3(37, 4, 17.5466)
+material = SubResource("FogMaterial_j0y75")
+
+[node name="Forest" type="Node3D" parent="."]
+
+[node name="Tree1" type="Sprite3D" parent="Forest"]
+transform = Transform3D(0.898491, 0, 0, 0, 0.898491, 0, 0, 0, 0.898491, -4.899, 3.702, -2.695)
+layers = 3
+cast_shadow = 2
+shaded = true
+double_sided = false
+alpha_cut = 2
+texture = ExtResource("3_e1ual")
+
+[node name="Leaves1" type="Sprite3D" parent="Forest/Tree1"]
+transform = Transform3D(1.05454, 0, 0, 0, 1.05454, 0, 0, 0, 1, -0.409, 2.696, 0.5)
+cast_shadow = 2
+shaded = true
+double_sided = false
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("4_sdyd1")
+
+[node name="Leaves2" type="Sprite3D" parent="Forest/Tree1"]
+transform = Transform3D(1.05454, 0, 0, 0, 1.05454, 0, 0, 0, 1, -0.409, 2.696, 1)
+cast_shadow = 2
+shaded = true
+double_sided = false
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("5_dw3tm")
+
+[node name="Tree5" type="Sprite3D" parent="Forest"]
+transform = Transform3D(0.898491, 0, 0, 0, 0.898491, 0, 0, 0, 0.898491, -65.846, -5.088, -5.421)
+layers = 3
+cast_shadow = 2
+shaded = true
+double_sided = false
+alpha_cut = 2
+texture = ExtResource("3_e1ual")
+
+[node name="Leaves1" type="Sprite3D" parent="Forest/Tree5"]
+transform = Transform3D(1.05454, 0, 0, 0, 1.05454, 0, 0, 0, 1, -0.409, 2.696, 0.5)
+cast_shadow = 2
+shaded = true
+double_sided = false
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("4_sdyd1")
+
+[node name="Leaves2" type="Sprite3D" parent="Forest/Tree5"]
+transform = Transform3D(1.05454, 0, 0, 0, 1.05454, 0, 0, 0, 1, -0.409, 2.696, 1)
+cast_shadow = 2
+shaded = true
+double_sided = false
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("5_dw3tm")
+
+[node name="Tree4" type="Sprite3D" parent="Forest"]
+transform = Transform3D(1.51394, 0, 0, 0, 1.51394, 0, 0, 0, 0.898491, 8.21745, 6.57895, -16.6071)
+layers = 3
+cast_shadow = 2
+flip_h = true
+shaded = true
+double_sided = false
+alpha_cut = 2
+texture = ExtResource("3_e1ual")
+
+[node name="Leaves1" type="Sprite3D" parent="Forest/Tree4"]
+transform = Transform3D(1.05454, 0, 0, 0, 1.05454, 0, 0, 0, 1, -0.409, 2.696, 0.5)
+cast_shadow = 2
+shaded = true
+double_sided = false
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("4_sdyd1")
+
+[node name="Leaves2" type="Sprite3D" parent="Forest/Tree4"]
+transform = Transform3D(1.05454, 0, 0, 0, 1.05454, 0, 0, 0, 1, -0.409, 2.696, 1)
+cast_shadow = 2
+flip_h = true
+shaded = true
+double_sided = false
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("5_dw3tm")
+
+[node name="Tree2" type="Sprite3D" parent="Forest"]
+transform = Transform3D(0.898491, 0, 0, 0, 0.898491, 0, 0, 0, 0.898491, -125.934, 1.14349, -2.755)
+layers = 3
+cast_shadow = 2
+shaded = true
+double_sided = false
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("3_e1ual")
+
+[node name="Leaves1" type="Sprite3D" parent="Forest/Tree2"]
+transform = Transform3D(1.05454, 0, 0, 0, 1.05454, 0, 0, 0, 1, -0.409, 2.696, 0.5)
+cast_shadow = 2
+shaded = true
+double_sided = false
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("4_sdyd1")
+
+[node name="Leaves2" type="Sprite3D" parent="Forest/Tree2"]
+transform = Transform3D(1.05454, 0, 0, 0, 1.05454, 0, 0, 0, 1, -0.409, 2.696, 1)
+cast_shadow = 2
+shaded = true
+double_sided = false
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("5_dw3tm")
+
+[node name="Tree3" type="Sprite3D" parent="Forest"]
+transform = Transform3D(0.898491, 0, 0, 0, 0.898491, 0, 0, 0, 0.898491, -110.934, 2.50626, -5.755)
+layers = 3
+cast_shadow = 2
+shaded = true
+double_sided = false
+alpha_cut = 2
+texture = ExtResource("3_e1ual")
+
+[node name="Leaves1" type="Sprite3D" parent="Forest/Tree3"]
+transform = Transform3D(1.05454, 0, 0, 0, 1.05454, 0, 0, 0, 1, -0.409, 2.696, 0.5)
+cast_shadow = 2
+shaded = true
+double_sided = false
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("4_sdyd1")
+
+[node name="Leaves2" type="Sprite3D" parent="Forest/Tree3"]
+transform = Transform3D(1.05454, 0, 0, 0, 1.05454, 0, 0, 0, 1, -0.409, 2.696, 1)
+cast_shadow = 2
+flip_h = true
+shaded = true
+double_sided = false
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("5_dw3tm")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94094, -1.52388, -12.7585)
+visible = false
+visibility_aabb = AABB(-25.0457, -7.68765, -12.4847, 50.0914, 15.3753, 24.9693)
+draw_pass_1 = SubResource("BoxMesh_8aqdw")
+
+[node name="InfiniteTerrain" parent="." instance=ExtResource("7_wr7tp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.435, 0, 0)
+terrain_scale = 96.0
+terrain_x_offset = -6192.8
+terrain_y_offset = 2976.6
+
+[node name="References" type="Node3D" parent="."]
+visible = false
+
+[node name="Sprite3D" type="Sprite3D" parent="References"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.201, -35.7032, 2.95026, 0)
+transparency = 0.74
+pixel_size = 0.1
+texture_filter = 0
+texture = ExtResource("6_ffidk")

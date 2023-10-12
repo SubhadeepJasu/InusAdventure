@@ -1,0 +1,19 @@
+[gd_scene load_steps=7 format=3 uid="uid://dyu0rg4bo1s1f"]
+
+[ext_resource type="Script" path="res://src/world/InfiniteTerrain.gd" id="1_ggy6u"]
+[ext_resource type="Image" uid="uid://cagkxykunella" path="res://scenes/world/prototype/terrain_h_map.res" id="2_6blmp"]
+[ext_resource type="ArrayMesh" uid="uid://cmb31p3p27kum" path="res://assets/models/InfiniteTerrainMesh.obj" id="2_qkrl3"]
+[ext_resource type="Texture2D" path="res://textures/world/prototype/grass.dds" id="3_4vspg"]
+[ext_resource type="Material" uid="uid://y8u7duxcffjc" path="res://materials/terrain/infinite/infinite_terrain.material" id="3_8uy34"]
+[ext_resource type="Texture2D" path="res://textures/world/prototype/earth.dds" id="4_q0mki"]
+
+[node name="InfiniteTerrain" type="Node3D"]
+script = ExtResource("1_ggy6u")
+terrain_height = 1.0
+height_map = ExtResource("2_6blmp")
+surface_albedo_array = Array[ImageTexture]([ExtResource("3_4vspg"), ExtResource("4_q0mki"), ExtResource("4_q0mki")])
+
+[node name="TerrainPlane" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_qkrl3")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("3_8uy34")

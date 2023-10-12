@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://tlo7qdpf0rt4"]
+
+[ext_resource type="Shader" path="res://materials/volumetrics/god_rays.gdshader" id="1_raaba"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_raaba")
+shader_parameter/angle = 0.18
+shader_parameter/position = 0.265
+shader_parameter/spread = 0.331
+shader_parameter/cutoff = 4.75e-08
+shader_parameter/falloff = 0.2
+shader_parameter/edge_fade = 0.397
+shader_parameter/speed = 2.05
+shader_parameter/ray1_density = 19.34
+shader_parameter/ray2_density = 65.065
+shader_parameter/ray2_intensity = 0.166
+shader_parameter/color = Vector4(0.165, 0.9, 0.6, 0.425)
+shader_parameter/hdr = true
+shader_parameter/seed = 5.0

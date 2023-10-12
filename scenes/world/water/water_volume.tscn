@@ -1,0 +1,112 @@
+[gd_scene load_steps=12 format=3 uid="uid://pmocamrwrgva"]
+
+[ext_resource type="Script" path="res://src/world/WaterVolume.gd" id="1_aj0ls"]
+[ext_resource type="Shader" path="res://materials/water_wave_sim.gdshader" id="2_w50c2"]
+[ext_resource type="Shader" uid="uid://60uwkvaijgmd" path="res://materials/water_sim_visual_shader.tres" id="3_yla81"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_bdelg"]
+viewport_path = NodePath("Collision")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ihu1w"]
+viewport_path = NodePath("Simulation")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7gecq"]
+resource_local_to_scene = true
+shader = ExtResource("2_w50c2")
+shader_parameter/phase = 0.2
+shader_parameter/attenuation = 0.95
+shader_parameter/deltaUV = 3.0
+shader_parameter/sim_tex = SubResource("ViewportTexture_ihu1w")
+shader_parameter/col_tex = SubResource("ViewportTexture_bdelg")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_l5qel"]
+viewport_path = NodePath("WaterVolume/Simulation")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cin40"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_yla81")
+shader_parameter/amplitude = 0.3
+shader_parameter/refraction = 1.0
+shader_parameter/simulation2 = SubResource("ViewportTexture_l5qel")
+shader_parameter/simulation = SubResource("ViewportTexture_l5qel")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_d8jh4"]
+lightmap_size_hint = Vector2i(42, 42)
+material = SubResource("ShaderMaterial_cin40")
+size = Vector2(8, 8)
+subdivide_width = 512
+subdivide_depth = 512
+
+[sub_resource type="Environment" id="Environment_3ae78"]
+background_mode = 1
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_n6ydp"]
+dof_blur_near_enabled = true
+dof_blur_near_distance = 0.8
+dof_blur_near_transition = -1.0
+dof_blur_amount = 1.0
+
+[node name="WaterVolume" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.998, 0)
+script = ExtResource("1_aj0ls")
+
+[node name="Simulation" type="SubViewport" parent="."]
+disable_3d = true
+vrs_mode = 2
+size = Vector2i(1024, 1024)
+render_target_clear_mode = 2
+render_target_update_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="Simulation"]
+material = SubResource("ShaderMaterial_7gecq")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+gi_mode = 0
+mesh = SubResource("PlaneMesh_d8jh4")
+
+[node name="WaterTransformRemote" type="RemoteTransform3D" parent="Water"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+remote_path = NodePath("../../Collision/TransformReceiver")
+
+[node name="Collision" type="SubViewport" parent="."]
+positional_shadow_atlas_size = 0
+positional_shadow_atlas_quad_0 = 0
+positional_shadow_atlas_quad_1 = 0
+positional_shadow_atlas_quad_2 = 0
+positional_shadow_atlas_quad_3 = 0
+size = Vector2i(1024, 1024)
+render_target_clear_mode = 2
+
+[node name="TransformReceiver" type="Node3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.998, 0)
+
+[node name="WaterCam" type="Camera3D" parent="Collision/TransformReceiver"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.5, 0)
+cull_mask = 2048
+environment = SubResource("Environment_3ae78")
+attributes = SubResource("CameraAttributesPractical_n6ydp")
+projection = 1
+fov = 37.8493
+size = 8.0
+near = 0.7
+far = 1.2
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+layers = 15
+max_distance = 10.0
+size = Vector3(8, 8, 8)
+box_projection = true
+interior = true
+enable_shadows = true
+cull_mask = 1046527
+ambient_mode = 2
+ambient_color = Color(0.505882, 0.858824, 0.733333, 1)
+ambient_color_energy = 0.4

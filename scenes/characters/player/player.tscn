@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://6k672k4tlcjy"]
+
+[ext_resource type="Script" path="res://src/characters/Player.cs" id="1_insp6"]
+[ext_resource type="PackedScene" uid="uid://hkx58tbo7xle" path="res://scenes/characters/player/inu_model.tscn" id="3_w4mby"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_047w3"]
+height = 0.859475
+
+[node name="Player" type="CharacterBody3D"]
+top_level = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+floor_max_angle = 1.0472
+script = ExtResource("1_insp6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_047w3")
+
+[node name="InuModel" parent="." instance=ExtResource("3_w4mby")]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 3
+transform = Transform3D(-1.46433e-08, 0, -0.335, 0, 0.335, 0, 0.335, 0, -1.46433e-08, 0, 0, 0)
+rotation_order = 3
